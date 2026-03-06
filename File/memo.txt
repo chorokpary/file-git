@@ -1,0 +1,12 @@
+
+http://172.16.2.152:30880/login
+
+id : admin
+pw : Ntels.com1
+
+[기존 ks-console 이미지 정보]
+image: >-
+            edgestack.harbor.core:32443/library/registry.gitlab.com/sonaproject/ks-console:v3.4.1
+
+[배포 테스트 이미지 정보]
+image: 'chorokpary/ks-console-mig:latest'
