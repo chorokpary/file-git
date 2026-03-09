@@ -10,3 +10,33 @@ image: >-
 
 [배포 테스트 이미지 정보]
 image: 'chorokpary/ks-console-mig:latest'
+
+
+# kaas로 이미지 전달, 적용 방법
+```
+# host master 에서 dockerhub에서 pull, 파일생성
+sudo ctr images pull docker.io/chorokpary/ks-console-mig:latest
+sudo ctr images export ks-console-mig.tar docker.io/chorokpary/ks-console-mig:latest
+
+# kass master 에서 sftp id 생성 (최초 1회 만)
+edgectl access-machines                        <-- 이건 host master에서 실행하여 kaas master로 접속하는거임, kaas 선택, master 선택
+sftp ntels@10.233.68.172        ntels!234
+
+# scp 로 host master에서 kaas master로 복사
+scp ./ks-console-mig.tar ntels@10.233.68.172:/tmp
+
+# image 로딩, 확인
+sudo ctr -n k8s.io images import /tmp/ks-console-mig.tar
+sudo crictl images ls
+
+# Deployment 변경 (최초 1회 만?)
+kubectl edit deployments -n petasus-system ks-console
+- 기존
+  image: edgestack.harbor.core:32443/library/registry.gitlab.com/sonaproject/ks-console:v3.4.1
+  imagePullPolicy: Always
+- 변경
+   image : docker.io/chorokpary/ks-console-mig:latest
+   imagePullPolicy: IfNotPresent
+
+```
+
