@@ -57,6 +57,19 @@
                     },
       ] 
 
+* mig 설정 관련 문의 내용
+
+처음에 연결되어 있던 gpu node가 삭제 되어서, 
+mig-test-gpu-nodepool-02-pkndg-qpglr 노드에 petasus-test-profile-mixed-exampl을 연결했는데 아래처럼 실패로 나옵니다. 
+
+"nvidia.com/mig.config":"petasus-test-profile-mixed-example",
+"nvidia.com/mig.config.state":"failed",
+
+현재 mig-test-gpu-nodepool-02-pkndg-qpglr 노드에 mig 관련 데이터가 수집 안되고 있는 상태 입니다. 
+
+
+
+
 
 =======================================================================
 2026년 3월 09일 월요일
