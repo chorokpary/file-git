@@ -30,6 +30,59 @@
 }
 
 
+1. 리스너 생성 후 protocol이 http로 고정되어 생성됩니다. 
+
+[리스너 생성 전달 값]
+{name: "xlmtest", protocol: "udp", port: 22, pool: "xlmtest-p-1"}
+
+[리스너 생성 후 결과값]
+{
+    "message": "리스너가 성공적으로 생성되었습니다",
+    "data": {
+        "name": "xlmtest",
+        "project": "default",
+        "protocol": "http",
+        "port": 22,
+        "pool": "xlmtest-p-1",
+        "status": "active"
+    }
+}
+
+2. 풀 생성 시 모니터 적용이 안됩니다. 
+
+[풀 생성 전달 값]
+{name: "xlbtest-p-1", load_balancing_method: "round_robin", monitor: "xlbtest-p-1-monitor-http"}
+
+[풀 생성 후 결과값]
+{
+    "message": "풀이 성공적으로 생성되었습니다",
+    "data": {
+        "name": "xlbtest-p-1",
+        "project": "default",
+        "load_balancing_method": "round_robin",
+        "members": null,
+        "status": "active"
+    }
+}
+
+3. 풀에 모니터 업데이트 시 적용이 안됩니다. 
+
+[풀 업데이트 전달 값]
+{load_balancing_method: "round_robin", monitor: "xlbtest-p-1-monitor-http"}
+
+[풀 업데이트 결과 값]
+{
+    "message": "풀이 성공적으로 수정되었습니다",
+    "data": {
+        "name": "xlbtest-p-1",
+        "project": "default",
+        "load_balancing_method": "round_robin",
+        "members": null,
+        "status": "active"
+    }
+}
+
+
 =======================================================================
 2026년 3월 17일 화요일
 =======================================================================
