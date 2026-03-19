@@ -1,5 +1,36 @@
 
 =======================================================================
+2026년 3월 19일 목요일
+=======================================================================
+
+[풀 생성 전달 값]
+{name: "test-xlb-1-p-1", load_balancing_method: "round_robin", monitor: "test-xlb-1-p-1-monitor-http"}
+
+[풀 생성 결과 값]
+{
+    "message": "풀이 성공적으로 생성되었습니다",
+    "data": {
+        "name": "test-xlb-1-p-1",
+        "project": "default",
+        "load_balancing_method": "round_robin",
+        "members": null,
+        "status": "active"
+    }
+}
+
+[로드밸랜서 생성 전달 값]
+{name: "test-xlb-1", driver_id: "haproxy", ip_address: "11.11.11.11", listeners: ["test-xlb-1"]}
+
+[로브밸런서 생성 실패 결과값]
+{
+    "error": "풀을 먼저 생성해야 합니다",
+    "details": "풀(백엔드) 'p-1'을 먼저 생성해야 합니다. default_backend가 존재하지 않아 프론트엔드를 활성화할 수 없습니다",
+    "code": "POOL_REQUIRED_FIRST",
+    "timestamp": "2026-03-19T01:35:59Z"
+}
+
+
+=======================================================================
 2026년 3월 17일 화요일
 =======================================================================
 // const resultMfa = await request.get(`/users/auth/mfa/list`)  
