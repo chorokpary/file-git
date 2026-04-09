@@ -1,5 +1,29 @@
 
 =======================================================================
+2026년 4월 9일 목요일
+=======================================================================
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: nvidia-dcgm-exporter
+  name: nvidia-dcgm-exporter
+  namespace: nvidia-system
+spec:
+  endpoints:
+    - interval: 15s
+      path: /metrics
+      port: gpu-metrics
+  jobLabel: app
+  namespaceSelector:
+    matchNames:
+      - nvidia-system
+  selector:
+    matchLabels:
+      app: nvidia-dcgm-exporter
+
+
+=======================================================================
 2026년 4월 7일 화요일
 =======================================================================
 [
