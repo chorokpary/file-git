@@ -1,5 +1,112 @@
 
 =======================================================================
+2026년 4월 13일 월요일
+=======================================================================
+
+수정해 주신 API 로 테스트 후 이슈가 있어 메일 전다르 드립니다. 
+
+
+[이슈 내용]
+리스너가 생성 후 로드밸런서에 연결시 오류가 발생하며, 삭제 처리 시 멤버가 삭제되었는데
+풀에 멤버가 있어 삭제할 수 없다고 나옵니다. 
+
+확인 부탁 드립니다.
+
+[리스너 생성]
+{
+    "message": "리스너가 성공적으로 생성되었습니다",
+    "data": {
+        "name": "test-lb-28",
+        "project": "default",
+        "protocol": "tcp",
+        "port": 22,
+        "pool": "test-lb-28-test-pool-33",
+        "status": "active"
+    }
+}
+
+[로드밸런서 리스너 연결 오류]
+호출 URL : /xlb/v1/projects/default/attachments?lbName=test-lb-28&listenerName=test-lb-28
+
+{
+    "error": "리스너 연결 실패",
+    "details": "default_backend 설정 실패: 404 Not Found, 응답: {\"code\":404,\"message\":\"missing object: Frontend test-lb-28 does not exist\"}\n",
+    "code": "ATTACH_LISTENER_FAILED",
+    "timestamp": "2026-04-13T00:46:47Z"
+}
+
+[멤버 삭제]
+호출 URL : /xlb/v1/projects/default/members/test-vm-xlb-1
+{"message":"멤버가 성공적으로 삭제되었습니다"}
+
+[풀 삭제 오류]
+호출 URL : /xlb/v1/projects/default/pools/test-lb-28-test-pool-33
+
+{
+    "error": "풀에 멤버가 있어 삭제할 수 없습니다",
+    "details": "풀을 삭제하려면 먼저 모든 멤버를 삭제해야 합니다",
+    "code": "POOL_HAS_MEMBERS",
+    "timestamp": "2026-04-13T00:46:51Z"
+}
+
+감사합니다.
+
+=======================================================================
+2026년 4월 10일 금요일
+=======================================================================
+
+[ 404 오류 내용 ]
+{
+    "error": "풀을 찾을 수 없습니다",
+    "details": "프로젝트 'default'에서 풀 'test-11-pool-23'를 찾을 수 없습니다",
+    "code": "POOL_NOT_FOUND",
+    "timestamp": "2026-04-10T03:23:24Z"
+}
+
+[ resource 데이타 ]
+
+{
+    "project": {
+        "name": "default",
+        "driver_id": "haproxy"
+    },
+    "loadbalancers": [],
+    "listeners": [],
+    "pools": [
+        {
+            "name": "test-11-pool-23",
+            "project": "default",
+            "load_balancing_method": "round_robin",
+            "members": null,
+            "status": "active"
+        },
+        {
+            "name": "test-22-pool-1",
+            "project": "default",
+            "load_balancing_method": "round_robin",
+            "members": null,
+            "status": "active"
+        },
+        {
+            "name": "test-2-p-1",
+            "project": "default",
+            "load_balancing_method": "round_robin",
+            "members": null,
+            "status": "active"
+        },
+        {
+            "name": "test-lb-1-p-1",
+            "project": "default",
+            "load_balancing_method": "round_robin",
+            "members": null,
+            "status": "active"
+        }
+    ],
+    "members": [],
+    "monitors": []
+}
+
+=======================================================================
 2026년 4월 9일 목요일
 =======================================================================
 apiVersion: monitoring.coreos.com/v1
